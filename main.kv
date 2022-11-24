@@ -1,0 +1,111 @@
+
+<ItemWeather>:
+    ImageLeftWidget:
+        source: root.source
+
+
+<ContentNavigationDrawer>:
+    orientation: 'vertical'
+    padding: '8dp'
+    spacing: '8dp'
+
+
+    AnchorLayout:
+        anchor_x: 'left'
+        size_hint_y: None
+        height: avatar.height
+
+        Image:
+            id: avatar
+            size_hint: None, None
+            size: "50dp", "50dp"
+            source: 'data/logo.jpeg'
+    MDLabel:
+        text: 'Awesome app'
+        font_style: "Button"
+        size_hint_y:None 
+        height: self.texture_size[1]
+
+    MDLabel:
+        text: 'nguyenxuanhuynh@example.com'
+        font_style: "Caption"
+        size_hint_y:None 
+        height: self.texture_size[1]                
+
+
+    ScrollView:
+
+        MDList:
+
+            OneLineListItem:
+                text:'Home'
+                on_press:
+                    root.nav_drawer.set_state('close')
+                    root.screen_manager.current = 'home screen'    
+                    
+
+              
+
+            OneLineListItem:
+                text:'About us'
+                on_press:
+                    root.nav_drawer.set_state('close')
+                    root.screen_manager.current = 'about screen'    
+                    
+
+                            
+
+            
+
+
+
+
+<MainWidget>:
+    Screen:
+
+        MDNavigationLayout:
+            ScreenManager:
+                id: screen_manager
+
+                HomeScreen:
+                    name: 'home screen'
+                    BoxLayout:
+                        orientation: 'vertical'
+
+                        MDTopAppBar:
+                            title:'My app'
+                            elevation:10
+                            left_action_items:[['menu',lambda x: nav_drawer.set_state('toggle')]]
+
+                        ScrollView:
+                            MDList:
+                                id:home_list 
+                            
+                AboutScreen:
+                    name: 'about screen'
+                    BoxLayout:
+                        orientation: 'vertical'
+
+                        MDTopAppBar:
+                            title:'My app'
+                            elevation:10
+                            left_action_items:[['menu',lambda x: nav_drawer.set_state('toggle')]]
+
+                        ScrollView:
+                            MDLabel:
+                                id:about_label
+                                text_size: cm(6), cm(4)
+                                size: self.texture_size
+                                halign:'center'
+                                text_color:(255,255,30,0)
+                                font_style:'H3'
+                                text:'This is my app of Huynh' 
+
+
+            MDNavigationDrawer:
+                id: nav_drawer
+
+                ContentNavigationDrawer:
+                    id: content_drawer
+                    screen_manager: screen_manager
+                    nav_drawer: nav_drawer
